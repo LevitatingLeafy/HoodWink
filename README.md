@@ -9,6 +9,7 @@ Current
 
 <details>
 <summary>Later versions will incorporate</summary>
+
 More techniques
 - Process Injection
 - Process Hollow
