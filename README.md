@@ -30,6 +30,11 @@ Do above with
 - In other languages (C++, Nim, Rust, Python, ...)
 </details>
 
+#### Install
+1. Clone into Visual Studio
+2. Change path variable in Services/PathService.cs to project home (where Program.cs is)
+
+
 #### Help Menu
 ```
 Show Modules:

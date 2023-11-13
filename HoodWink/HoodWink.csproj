@@ -79,6 +79,7 @@
     <Compile Include="Services\WinkService.cs" />
     <Compile Include="Services\WriteService.cs" />
     <Compile Include="Suggestions\Commands.cs" />
+    <None Include="packages.config" />
     <None Include="TechniqueSource\Spawn_QueueApc.cs" />
     <None Include="TechniqueSource\Remote_CreateRemoteThread.cs" />
     <None Include="TechniqueSource\Inline_NewThread.cs" />
@@ -86,7 +87,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

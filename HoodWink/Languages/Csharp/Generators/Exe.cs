@@ -45,8 +45,7 @@ namespace HoodWink.Languages.Csharp.Generators
                 gen += newLine;
                 // Protection                               // NOT DONE
                 byte[] payload = File.ReadAllBytes(file);
-                string encryptedPayload = CryptoService.Encrypt(payload, out string keyBase64, out string ivBase64);
-                byte[] decrypted = CryptoService.Decrypt(encryptedPayload, keyBase64, ivBase64);
+                string encryptedPayload = CryptoService.Encrypt(payload, out string keyBase64, out string ivBase64);                
                 gen += $"string b64 = \"{encryptedPayload}\";";
                 gen += newLine;
                 gen += $"string key = \"{keyBase64}\";";
