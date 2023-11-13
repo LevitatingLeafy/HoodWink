@@ -4,6 +4,26 @@ namespace HoodWink.Services
 {
     public static class WriteService
     {
+        public static void Header(string msg)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(msg);
+            Console.ResetColor();
+        }
+        public static void Header(string msg, string name)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write(msg);
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine(name);
+            Console.ResetColor();
+        }
+        public static void Info(string msg)
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine(msg);
+            Console.ResetColor();
+        }
         public static void Success(string msg)
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -43,7 +63,7 @@ namespace HoodWink.Services
         public static void ErrorExit(string err)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write("[!] Error: ");
+            Console.Write("[!] Exiting: ");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(err);
             Console.ResetColor();
