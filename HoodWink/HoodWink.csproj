@@ -54,7 +54,8 @@
     <Compile Include="Languages\Cpp\Formats\Exe.cs" />
     <Compile Include="Languages\Cpp\Generators\Exe.cs" />
     <Compile Include="Languages\Cpp\Protections\Aes256.cs" />
-    <Compile Include="Languages\Cpp\Techniques\Inline.cs" />
+    <Compile Include="Languages\Cpp\Techniques\Inline_NewThread.cs" />
+    <Compile Include="Languages\Cpp\Techniques\Remote_CreateRemoteThread.cs" />
     <Compile Include="Languages\Csharp\Compilers\Exe.cs" />
     <Compile Include="Languages\Csharp\Extras\AmsiBypass.cs" />
     <Compile Include="Languages\Csharp\Extras\PpidSpoof.cs" />

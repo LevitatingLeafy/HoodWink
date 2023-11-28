@@ -5,17 +5,20 @@ namespace HoodWink.Languages.Cpp.Formats
 {
     public class Exe : Models.Base.FormatExe
     {
-        public override List<string> FileDependencies => throw new NotImplementedException();
+        public override string Description => "";
+        public override List<string> FileDependencies => new List<string> { @"" };
 
-        public override string Using => throw new NotImplementedException();
+        public override string Using => @"//Format Inclue";
 
-        public override string NamespaceAndClassHeader => throw new NotImplementedException();
-        public override string MainHeader => throw new NotImplementedException();
+        public override string NamespaceAndClassHeader => @"";
+        public override string MainHeader => @"int main(int argc, const char* argv[])
+{";
 
-        public override string MainBody => throw new NotImplementedException();
+        public override string MainBody => @"//Format MainBody";
 
-        public override string MainFooter => throw new NotImplementedException();
+        public override string MainFooter => @"     return 0;
+}";
 
-        public override string NamespaceAndClassFooter => throw new NotImplementedException();
+        public override string NamespaceAndClassFooter => @"// Format Footer";
     }
 }

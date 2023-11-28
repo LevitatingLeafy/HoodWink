@@ -1,11 +1,13 @@
 ﻿using HoodWink.Services;
 using System;
 using System.IO;
+using System.Text;
 
 namespace HoodWink.Languages.Csharp.Generators
 {
     public class Exe : Models.Base.Generator
     {
+        public override string Description => "";
         public override string ProjectPath => throw new NotImplementedException(); // Not Used
         public override string Gen(ref string targetSourcePath, ref string file, ref Models.Base.FormatExe formatInstance, ref Models.Base.Technique techniqueInstance, ref Models.Base.Protections protectionInstance, ref Models.Base.Extras extraInstance)
         {
@@ -45,7 +47,9 @@ namespace HoodWink.Languages.Csharp.Generators
                 gen += newLine;
                 // Protection                               // NOT DONE
                 byte[] payload = File.ReadAllBytes(file);
-                string encryptedPayload = CryptoService.Encrypt(payload, out string keyBase64, out string ivBase64);                
+                string encryptedPayload = CryptoService.Encrypt(payload, out string keyBase64, out string ivBase64);
+                //Console.WriteLine($"Decrypted : {BitConverter.ToString(CryptoService.Decrypt(encryptedPayload, keyBase64, ivBase64))}"); // Debug
+                //Console.WriteLine($"Decrypted : {Encoding.UTF8.GetString(CryptoService.Decrypt(encryptedPayload, keyBase64, ivBase64))}"); // Debug
                 gen += $"string b64 = \"{encryptedPayload}\";";
                 gen += newLine;
                 gen += $"string key = \"{keyBase64}\";";

@@ -4,6 +4,7 @@ namespace HoodWink.Languages.Csharp.Techniques
 {
     public class Inline : Models.Base.Technique
     {
+        public override string Description => "Uses Marshal Delegate";
         public override List<string> FileDependencies => new List<string> { @"Languages\Csharp\FileDependencies\Kernel32.cs" };
 
         public override string Using => @"using System;

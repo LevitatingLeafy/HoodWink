@@ -1,17 +1,17 @@
 # HoodWink
-Simple Loader Generator for me to learn evasion techniques
+A Modular project for loading malicious code
 
 ### Overview
-Current
-1. HoodWink will read in a file containing shellcode
-2. Encrypt it with AES 256 using random key & iv and Base 64 encode
-3. This is then placed into a generated source file using a given injection method (in help below) and compiled
-- (only implemented for Csharp right now)
+Currently
+- HoodWink will take in shellcode and encrypt it
+- Generate a loader using a given language and technique(s) to execute the shellcode
+- More modules and languages can easily be added by inheriting from base classes
+- Still a work in progress with lots to do :)
 
 Later versions will include more options for encryption, injection, languages, and more
 
 <details>
-<summary>Later versions will incorporate</summary>
+<summary>Click to see futute options </summary>
 
 More injection techniques
 - Process Hollow
@@ -27,12 +27,18 @@ Extras
 Do above with
 - both shellcode and dlls
 - kernel32 and ntdll.dll (direct syscalls)
-- In other languages (C++, Nim, Rust, Python, ...)
+- In other languages (Nim, Rust, Python, ...)
 </details>
 
 #### Install
 1. Clone into Visual Studio
-2. Change path variable in Services/PathService.cs to project home (where Program.cs is)
+2. Change path variable in Services/PathService.cs
+
+Requires
+- [clang for Visual Studio (clang-cl & lld-link)](https://learn.microsoft.com/en-us/cpp/build/clang-support-msbuild?view=msvc-170)
+- [Nuget Package (Csharp Compiler)](https://www.nuget.org/packages/Microsoft.CodeDom.Providers.DotNetCompilerPlatform)
+- [Cryptopp](https://www.cryptopp.com/)
+	- [Guide for Building the Library](https://www.ired.team/miscellaneous-reversing-forensics/aes-encryption-example-using-cryptopp-.lib-in-visual-studio-c++)
 
 
 #### Help Menu
@@ -53,6 +59,6 @@ Example:
 <details>
 <summary>Structure</summary>
 
-I did not do this yet, ha!
+Ha! Made you look
 
 </details>

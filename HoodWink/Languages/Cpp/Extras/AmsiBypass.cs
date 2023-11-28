@@ -5,12 +5,13 @@ namespace HoodWink.Languages.Cpp.Extras
 {
     public class AmsiBypass : Models.Base.Extras
     {
-        public override List<string> FileDependencies => throw new NotImplementedException();
+        public override string Description => "Not Implemented Yet";
+        public override List<string> FileDependencies => new List<string> { @"" };
 
-        public override string Using => throw new NotImplementedException();
+        public override string Using => @"//Amsi Using";
 
-        public override string MainLogic => throw new NotImplementedException();
+        public override string MainLogic => @"//Amsi MainLogic";
 
-        public override string AdditionalFunctions => throw new NotImplementedException();
+        public override string AdditionalFunctions => @"//Amsi Additional Functions";
     }
 }

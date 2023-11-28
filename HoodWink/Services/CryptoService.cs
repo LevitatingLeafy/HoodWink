@@ -28,6 +28,7 @@ namespace HoodWink.Services
                 //Console.WriteLine($"~ Aes Padding Mode: {aes.Padding}");
                 //Console.WriteLine($"~ Aes Key Size :    {aes.KeySize}");
                 //Console.WriteLine($"~ Aes Block Size :  {aes.BlockSize}");
+                //Console.WriteLine($"~ Aes IV Length :   {aes.IV.Length}");                
                 //Console.WriteLine();
 
                 // Create encrypter and run

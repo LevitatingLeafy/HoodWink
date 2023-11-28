@@ -4,12 +4,13 @@ namespace HoodWink.Languages.Csharp.Techniques
 {
     public class Remote_CreateRemoteThread : Models.Base.Technique
     {
+        public override string Description => "Inject via CreateRemoteThread";
         public override List<string> FileDependencies => new List<string> { @"Languages\Csharp\FileDependencies\Kernel32.cs" };
 
         public override string Using => @"using System;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
-using HookWinkTest.Languages.Csharp.FileDependencies;";
+using HoodWink.Languages.Csharp.FileDependencies;";
 
         public override string ApiImports => @"// to allocate mem
         [DllImport(""kernel32"")]

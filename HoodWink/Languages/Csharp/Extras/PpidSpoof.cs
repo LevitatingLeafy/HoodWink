@@ -5,6 +5,7 @@ namespace HoodWink.Languages.Csharp.Extras
 {
     public class PpidSpoof : Models.Base.Extras
     {
+        public override string Description => "Not implemented yet :(";
         public override List<string> FileDependencies => throw new NotImplementedException();
 
         public override string Using => throw new NotImplementedException();

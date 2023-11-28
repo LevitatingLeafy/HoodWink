@@ -4,6 +4,7 @@ namespace HoodWink.Models.Base
 {
     public abstract class FormatExe
     {
+        public abstract string Description { get; }
         public abstract List<string> FileDependencies { get; }
         public abstract string Using { get; }
         public abstract string NamespaceAndClassHeader { get; }

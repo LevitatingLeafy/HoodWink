@@ -1,4 +1,5 @@
 ﻿using HoodWink.Services;
+using System;
 
 namespace HoodWink
 {
@@ -51,8 +52,9 @@ namespace HoodWink
                     WinkService.PrintAllModules();
                     System.Environment.Exit(0);
                 }
-                else if (args[i] == "-show" && args.Length >= i + 1)
+                else if (args[i] == "-show" && args.Length >= i + 2)
                 {
+                    Console.WriteLine($"args.length : {args.Length}");
                     WinkService.PrintLanguageModules(args[i + 1]);
                     System.Environment.Exit(0);
                 }

@@ -4,11 +4,12 @@ namespace HoodWink.Languages.Csharp.Techniques
 {
     public class Inline_NewThread : Models.Base.Technique
     {
+        public override string Description => "Uses VirtualAlloc & CreateThread";
         public override List<string> FileDependencies => new List<string> { @"Languages\Csharp\FileDependencies\Kernel32.cs" };
 
         public override string Using => @"using System;
 using System.Runtime.InteropServices;
-using HookWinkTest.Languages.Csharp.FileDependencies;";
+using HoodWink.Languages.Csharp.FileDependencies;";
 
         public override string ApiImports => @"// to allocate mem
         [DllImport(""kernel32"")]

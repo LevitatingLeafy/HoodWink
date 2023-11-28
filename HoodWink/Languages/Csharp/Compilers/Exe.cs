@@ -9,6 +9,7 @@ namespace HoodWink.Languages.Csharp.Compilers
 {
     public class Exe : Models.Base.Compiler
     {
+        public override string Description => "Nuget Package > Microsoft.CodeDom.Providers.DotNetCompilerPlatform";
         public override string CompilerPath => throw new NotImplementedException(); // Using Microsoft.CodeDom.Providers.DotNetCompilerPlatform instead
 
         public override string Compile(string sourcePath, List<string> dependencies)

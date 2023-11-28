@@ -4,6 +4,7 @@ namespace HoodWink.Languages.Csharp.Protections
 {
     public class Aes256 : Models.Base.Protections
     {
+        public override string Description => "AES 256 in CBC mode";
         public override List<string> FileDependencies => new List<string> { @"" };
 
         public override string Using => @"using System.IO;

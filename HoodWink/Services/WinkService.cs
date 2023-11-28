@@ -56,7 +56,16 @@ namespace HoodWink.Services
             }
 
             // Make target 
-            string filename = technique + "-" + Guid.NewGuid() + ".cs";
+            //string filename = technique + "-" + Guid.NewGuid() + ".cs";
+            string filename = technique + "-" + Guid.NewGuid();
+            if (lang == LANGUAGES.Csharp.ToString())
+            {
+                filename += ".cs";
+            }
+            else if (lang == LANGUAGES.Cpp.ToString())
+            {
+                filename += ".cpp";
+            }
             string targetSourcePath = payloadDir + filename;
 
             // Generate
@@ -72,7 +81,7 @@ namespace HoodWink.Services
 
             // Compile
             string compiledPath = compilerInstance.Compile(generatedFilePath, dependencies);
-            if (compilerInstance is null)
+            if (compiledPath is null)
             {
                 WriteService.ErrorExit("Compiler exited with errors");
             }
@@ -191,7 +200,7 @@ namespace HoodWink.Services
             // Exit on errors
             if (errors > 0)
             {
-                WriteService.ErrorExit($"LoadTypes encountered {errors}");
+                WriteService.ErrorExit($"LoadTypes encountered ({errors}) errors");
             }
             else // DEBUG
             {
@@ -434,6 +443,12 @@ namespace HoodWink.Services
         private static void PrintModule(string module)
         {
             WriteService.Info($"            -{module}");
+        }
+
+        private enum LANGUAGES
+        {
+            Csharp,
+            Cpp
         }
         private enum MODULES
         {
