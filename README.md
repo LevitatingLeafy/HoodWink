@@ -1,5 +1,5 @@
 # HoodWink
-A Modular project for loading malicious code
+A Modular project for loading "fun" code
 
 ### Overview
 Currently
