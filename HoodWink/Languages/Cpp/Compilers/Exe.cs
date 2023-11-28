@@ -46,14 +46,14 @@ namespace HoodWink.Languages.Cpp.Compilers
         private static bool CompileCode(string folderPath, string targetSrc, string targetObj, string targetLib, string targetExe)
         {
 
-            // COMPILE
-            // Powershell is used because it wasnt working without it (will fix later)
-            //Console.WriteLine("[+] Compiling");
+            //// COMPILE
+            // Powershell is used because it wasnt working without it (will fix later)            
             // Example cmd:
             // & 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\Llvm\x64\bin\clang-cl.exe' /I C:\Users\mperi\source\repos\HoodWinkSources\Cpp\Cpp\cryptopp-headers\ /c /Z7 /nologo /W3 /WX- /diagnostics:column /O2 /Oi /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /EHsc /MT /GS /Gy /fp:precise /Fo".\" /Gd /TP -m64  CryptoCppTest.cpp
             string filename = "powershell.exe";
             // Compiler
-            string arg0 = @"& 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\Llvm\x64\bin\clang-cl.exe'";
+            //string arg0 = @"& 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\Llvm\x64\bin\clang-cl.exe'";
+            string arg0 = @"& '" + Services.PathService.CLANG_CL_PATH + @"'";
             // Include libs
             string arg1 = @" /I " +  Services.PathService.CRYPTO_HEADERS_PATH;
             // FLags
@@ -69,15 +69,10 @@ namespace HoodWink.Languages.Cpp.Compilers
             }
 
 
-            // LINK
-            //Console.WriteLine("[+] Linking");
+            //// LINK            
             // Example cmd:
             // & 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\Llvm\x64\bin\lld-link.exe' /OUT:"C:\Users\mperi\Downloads\TEST\CryptoCppTest.exe" C:\Users\mperi\source\repos\HoodWinkSources\Cpp\cryptopplib\cryptlib.lib /LIBPATH:"C:\Program Files (x86)\Windows Kits\10\Lib\10.0.22621.0\um\x64\" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MACHINE:X64 /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\mperi\Downloads\TEST\CryptoCppTest.lib"  C:\Users\mperi\Downloads\TEST\CryptoCppTest.obj
-            filename = @"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\Llvm\x64\bin\lld-link.exe";
-            //filename = "powershell.exe"; // not using this like in above compile
-            // Linker
-            arg0 = "";
-            //arg0 = @"& 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\Llvm\x64\bin\lld-link.exe'";
+            filename = Services.PathService.LLD_LINK_PATH;            
             // Out
             arg1 = @" /OUT:""" + targetExe + @"""";
             // Libs
@@ -86,7 +81,7 @@ namespace HoodWink.Languages.Cpp.Compilers
             arg3 = @" /MACHINE:X64 /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /DYNAMICBASE /NXCOMPAT /IMPLIB:""" + targetLib + @"""";
             // Target
             string arg4 = " " + targetObj;
-            arguments = arg0 + arg1 + arg2 + arg3 + arg4;
+            arguments = arg1 + arg2 + arg3 + arg4;
             // Run
             if (!RunCommand(filename, arguments))
             {

