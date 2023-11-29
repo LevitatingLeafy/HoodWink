@@ -58,11 +58,11 @@ namespace HoodWink.Services
             // Make target 
             //string filename = technique + "-" + Guid.NewGuid() + ".cs";
             string filename = technique + "-" + Guid.NewGuid();
-            if (lang == LANGUAGES.Csharp.ToString())
+            if (lang == Utils.Enums.LANGUAGES.Csharp.ToString())
             {
                 filename += ".cs";
             }
-            else if (lang == LANGUAGES.Cpp.ToString())
+            else if (lang == Utils.Enums.LANGUAGES.Cpp.ToString())
             {
                 filename += ".cpp";
             }
@@ -91,7 +91,7 @@ namespace HoodWink.Services
             }
         }
 
-        private static void LoadLanguage(string lang, out List<Type> langTypes)
+        public static void LoadLanguage(string lang, out List<Type> langTypes)
         {
             langTypes = new List<Type>();
 
@@ -138,27 +138,27 @@ namespace HoodWink.Services
                 int index = a.FullName.LastIndexOf(".") + 1;
                 string name = a.FullName.Substring(index, a.FullName.Length - index);
 
-                if (a.FullName.Contains(MODULES.Formats.ToString()) && name == format)
+                if (a.FullName.Contains(Utils.Enums.MODULES.Formats.ToString()) && name == format)
                 {
                     formatType = a;
                 }
-                else if (a.FullName.Contains(MODULES.Techniques.ToString()) && name == technique)
+                else if (a.FullName.Contains(Utils.Enums.MODULES.Techniques.ToString()) && name == technique)
                 {
                     techniqueType = a;
                 }
-                else if (a.FullName.Contains(MODULES.Protections.ToString()) && name == protection)
+                else if (a.FullName.Contains(Utils.Enums.MODULES.Protections.ToString()) && name == protection)
                 {
                     protectionType = a;
                 }
-                else if (a.FullName.Contains(MODULES.Extras.ToString()) && name == extras)
+                else if (a.FullName.Contains(Utils.Enums.MODULES.Extras.ToString()) && name == extras)
                 {
                     extrasType = a;
                 }
-                else if (a.FullName.Contains(MODULES.Generators.ToString()) && name == format) // name to match format
+                else if (a.FullName.Contains(Utils.Enums.MODULES.Generators.ToString()) && name == format) // name to match format
                 {
                     generatorType = a;
                 }
-                else if (a.FullName.Contains(MODULES.Compilers.ToString()) && name == format) // name to match format
+                else if (a.FullName.Contains(Utils.Enums.MODULES.Compilers.ToString()) && name == format) // name to match format
                 {
                     compilerType = a;
                 }
@@ -351,114 +351,5 @@ namespace HoodWink.Services
                 WriteService.Success("LoadDependencies");
             }
         }
-
-        public static void PrintLanguageModules(string lang)
-        {
-            // Lists for each Module Type
-            List<Type> langTypes = new List<Type>();
-            List<string> formatTypes = new List<string>();
-            List<string> techniqueTypes = new List<string>();
-            List<string> protectionTypes = new List<string>();
-            List<string> extraTypes = new List<string>();
-            List<string> generatorTypes = new List<string>();
-            List<string> compilerTypes = new List<string>();
-
-            // Load
-            LoadLanguage(lang, out langTypes);
-            foreach (var type in langTypes)
-            {
-                int index = type.FullName.LastIndexOf(".") + 1;
-                string name = type.FullName.Substring(index, type.FullName.Length - index);
-
-                //Console.WriteLine(type.FullName);
-                if (type.FullName.Contains(MODULES.Formats.ToString()))
-                {
-                    formatTypes.Add(name);
-                }
-                else if (type.FullName.Contains(MODULES.Techniques.ToString()))
-                {
-                    techniqueTypes.Add(name);
-                }
-                else if (type.FullName.Contains(MODULES.Protections.ToString()))
-                {
-                    protectionTypes.Add(name);
-                }
-                else if (type.FullName.Contains(MODULES.Extras.ToString()))
-                {
-                    extraTypes.Add(name);
-                }
-                else if (type.FullName.Contains(MODULES.Generators.ToString()))
-                {
-                    generatorTypes.Add(name);
-                }
-                else if (type.FullName.Contains(MODULES.Compilers.ToString()))
-                {
-                    compilerTypes.Add(name);
-                }
-            }
-
-            // Display
-            WriteService.Header("[+] Modules for: ", lang);
-            WriteService.Header("Formats:");
-            foreach (var mod in formatTypes) { PrintModule(mod); }
-            WriteService.Header("Extras:");
-            foreach (var mod in extraTypes) { PrintModule(mod); }
-            WriteService.Header("Protections:");
-            foreach (var mod in protectionTypes) { PrintModule(mod); }
-            WriteService.Header("Techniques:");
-            foreach (var mod in techniqueTypes) { PrintModule(mod); }
-            WriteService.Header("Generators:");
-            foreach (var mod in generatorTypes) { PrintModule(mod); }
-            WriteService.Header("Compilers:");
-            foreach (var mod in compilerTypes) { PrintModule(mod); }
-        }
-
-        public static void PrintAllModules()
-        {
-            List<string> languages = new List<string>();
-
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            foreach (Type a in assembly.GetTypes())
-            {
-                int indexLang = a.FullName.IndexOf("Languages");
-                if (indexLang != -1)
-                {
-                    int indexDot = a.FullName.IndexOf(".", indexLang) + 1;
-                    int indexDot2 = a.FullName.IndexOf('.', indexDot);
-                    string langName = a.FullName.Substring(indexDot, indexDot2 - indexDot);
-
-                    if (!languages.Contains(langName))
-                    {
-                        languages.Add(langName);
-                    }
-                }
-            }
-
-            foreach (string language in languages)
-            {
-                PrintLanguageModules(language);
-            }
-        }
-
-        private static void PrintModule(string module)
-        {
-            WriteService.Info($"            -{module}");
-        }
-
-        private enum LANGUAGES
-        {
-            Csharp,
-            Cpp
-        }
-        private enum MODULES
-        {
-            Formats,
-            Techniques,
-            Protections,
-            Extras,
-            Generators,
-            Compilers
-        }
-
     }
 }

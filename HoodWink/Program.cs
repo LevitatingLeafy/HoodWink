@@ -47,15 +47,30 @@ namespace HoodWink
                 {
                     extr = args[i + 1];
                 }
+                else if (args[i] == "-langs")
+                {
+                    PrintService.PrintLanguages();
+                    System.Environment.Exit(0);
+                }
                 else if (args[i] == "-showall")
                 {
-                    WinkService.PrintAllModules();
+                    PrintService.PrintAllModules();
                     System.Environment.Exit(0);
                 }
                 else if (args[i] == "-show" && args.Length >= i + 2)
                 {
                     Console.WriteLine($"args.length : {args.Length}");
-                    WinkService.PrintLanguageModules(args[i + 1]);
+                    PrintService.PrintLanguageModules(args[i + 1]);                    
+                    System.Environment.Exit(0);
+                }                
+                else if (args[i] == "-descall")
+                {
+                    PrintService.PrintAllModulesDescriptions();
+                    System.Environment.Exit(0);
+                }
+                else if (args[i] == "-desc" && args.Length >= i + 2)
+                {
+                    PrintService.PrintLanguageModulesDescriptions(args[i + 1]);
                     System.Environment.Exit(0);
                 }
             }
@@ -71,11 +86,16 @@ namespace HoodWink
             // Build
             WinkService.BuildExe(file, lang, form, extr, prot, tech);
         }
+
+        // Usage
         private static void Usage()
         {
             WriteService.Header("Show Modules: ");
-            WriteService.Info(@"    .\HoodWink.exe  -showall        Show all Modules");
-            WriteService.Info(@"    .\HoodWink.exe  -show <lang>    Show Modules for Lang");
+            WriteService.Info(@"    .\HoodWink.exe  -langs        :  Show all Languages");
+            WriteService.Info(@"    .\HoodWink.exe  -showall      :  Show all Modules");
+            WriteService.Info(@"    .\HoodWink.exe  -show <lang>  :  Show Modules for lang");
+            WriteService.Info(@"    .\HoodWink.exe  -descall      :  Show all Modules + Descriptions");
+            WriteService.Info(@"    .\HoodWink.exe  -desc <lang>  :  Show Modules + Descriptions for lang");
             WriteService.Header("Syntax: ");
             WriteService.Info(@"    .\HoodWink.exe -file <name> -lang <name> -form <name> -extr <name> -prot <name> -tech <name> ");
             WriteService.Header("Example: ");

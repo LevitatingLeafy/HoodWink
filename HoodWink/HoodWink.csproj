@@ -77,9 +77,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CryptoService.cs" />
     <Compile Include="Services\PathService.cs" />
+    <Compile Include="Services\PrintService.cs" />
     <Compile Include="Services\WinkService.cs" />
     <Compile Include="Services\WriteService.cs" />
     <Compile Include="Suggestions\Commands.cs" />
+    <Compile Include="Utils\Enums.cs" />
     <None Include="packages.config" />
     <None Include="TechniqueSource\Spawn_QueueApc.cs" />
     <None Include="TechniqueSource\Remote_CreateRemoteThread.cs" />

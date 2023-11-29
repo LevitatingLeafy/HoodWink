@@ -7,7 +7,7 @@ namespace HoodWink.Languages.Csharp.Generators
 {
     public class Exe : Models.Base.Generator
     {
-        public override string Description => "";
+        public override string Description => "Default Generator for Exe";
         public override string ProjectPath => throw new NotImplementedException(); // Not Used
         public override string Gen(ref string targetSourcePath, ref string file, ref Models.Base.FormatExe formatInstance, ref Models.Base.Technique techniqueInstance, ref Models.Base.Protections protectionInstance, ref Models.Base.Extras extraInstance)
         {

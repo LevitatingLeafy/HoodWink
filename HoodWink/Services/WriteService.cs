@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 
 namespace HoodWink.Services
 {
@@ -22,6 +23,19 @@ namespace HoodWink.Services
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(msg);
+            Console.ResetColor();
+        }
+
+        public static void Description(string msg)
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine($"              -{msg,-30}");
+            Console.ResetColor();
+        }
+        public static void Description(string msg, string des)
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine($"              -{msg, -30} : {des, -30}");
             Console.ResetColor();
         }
         public static void Success(string msg)

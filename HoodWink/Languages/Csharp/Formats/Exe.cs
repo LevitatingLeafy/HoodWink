@@ -4,7 +4,7 @@ namespace HoodWink.Languages.Csharp.Formats
 {
     public class Exe : Models.Base.FormatExe
     {
-        public override string Description => "";
+        public override string Description => "Default Format for Exe";
         public override List<string> FileDependencies => new List<string> { @"" };
 
         public override string Using => @"//Format Using";
