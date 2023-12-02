@@ -79,12 +79,3 @@ Ha! Made you look
 They're all me, I have many accounts
 
 </details>
-
-### About Contributers
-<details>
-<summary>Structure</summary>
-
-They're all me, I have many accounts
-
-</details>
-
