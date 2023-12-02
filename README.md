@@ -50,12 +50,16 @@ Helper Flags:
     .\HoodWink.exe  -show <lang>  :  Show Modules for lang
     .\HoodWink.exe  -descall      :  Show all Modules + Descriptions
     .\HoodWink.exe  -desc <lang>  :  Show Modules + Descriptions for lang
+
 Syntax: Build Single
     .\HoodWink.exe -file <name> -lang <name> -form <name> -extr <name> -prot <name> -tech <name>
+
 Syntax: Build all Techniques
     .\HoodWink.exe -file <name> -lang <name> -form <name> -extr <name> -prot <name> -tech All
+
 Syntax: Build Everything
     .\HoodWink.exe -file <name> -genEvery
+
 Example:
     .\HoodWink.exe -file C:\Payloads\msf.bin -lang Csharp -form Exe -extr AmsiBypass -prot Aes256 -tech Spawn_QueueApc
 ```
