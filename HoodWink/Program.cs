@@ -130,12 +130,16 @@ namespace HoodWink
             WriteService.Info(@"    .\HoodWink.exe  -show <lang>  :  Show Modules for lang");
             WriteService.Info(@"    .\HoodWink.exe  -descall      :  Show all Modules + Descriptions");
             WriteService.Info(@"    .\HoodWink.exe  -desc <lang>  :  Show Modules + Descriptions for lang");
+            Console.WriteLine();
             WriteService.Header("Syntax: Build Single");
             WriteService.Info(@"    .\HoodWink.exe -file <name> -lang <name> -form <name> -extr <name> -prot <name> -tech <name> ");
+            Console.WriteLine();
             WriteService.Header("Syntax: Build all Techniques");
             WriteService.Info(@"    .\HoodWink.exe -file <name> -lang <name> -form <name> -extr <name> -prot <name> -tech All ");
+            Console.WriteLine();
             WriteService.Header("Syntax: Build Everything");
             WriteService.Info(@"    .\HoodWink.exe -file <name> -genEvery");
+            Console.WriteLine();
             WriteService.Header("Example: ");
             WriteService.Info(@"    .\HoodWink.exe -file C:\Payloads\msf.bin -lang Csharp -form Exe -extr AmsiBypass -prot Aes256 -tech Spawn_QueueApc");
         }
