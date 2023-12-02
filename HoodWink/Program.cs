@@ -24,27 +24,27 @@ namespace HoodWink
             // Parse Args
             for (int i = 0; i < args.Length; i++)
             {
-                if (args[i] == "-file" && args.Length >= i + 1)
+                if (args[i] == "-file" && args.Length >= i + 2)
                 {
                     file = args[i + 1];
                 }
-                else if (args[i] == "-lang" && args.Length >= i + 1)
+                else if (args[i] == "-lang" && args.Length >= i + 2)
                 {
                     lang = args[i + 1];
                 }
-                else if (args[i] == "-form" && args.Length >= i + 1)
+                else if (args[i] == "-form" && args.Length >= i + 2)
                 {
                     form = args[i + 1];
                 }
-                else if (args[i] == "-tech" && args.Length >= i + 1)
+                else if (args[i] == "-tech" && args.Length >= i + 2)
                 {
                     tech = args[i + 1];
                 }
-                else if (args[i] == "-prot" && args.Length >= i + 1)
+                else if (args[i] == "-prot" && args.Length >= i + 2)
                 {
                     prot = args[i + 1];
                 }
-                else if (args[i] == "-extr" && args.Length >= i + 1)
+                else if (args[i] == "-extr" && args.Length >= i + 2)
                 {
                     extr = args[i + 1];
                 }

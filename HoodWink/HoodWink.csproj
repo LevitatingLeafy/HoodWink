@@ -59,7 +59,6 @@
     <Compile Include="Languages\Cpp\Techniques\Remote_CreateRemoteThread.cs" />
     <Compile Include="Languages\Csharp\Compilers\Exe.cs" />
     <Compile Include="Languages\Csharp\Extras\AmsiBypass.cs" />
-    <Compile Include="Languages\Csharp\Extras\PpidSpoof.cs" />
     <Compile Include="Languages\Csharp\FileDependencies\Kernel32.cs" />
     <Compile Include="Languages\Csharp\Formats\Exe.cs" />
     <Compile Include="Languages\Csharp\Generators\Exe.cs" />

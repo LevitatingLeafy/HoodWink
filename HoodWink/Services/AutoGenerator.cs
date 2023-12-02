@@ -1,7 +1,9 @@
 ﻿using HoodWink.Models.Base;
 using Microsoft.SqlServer.Server;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
 
 namespace HoodWink.Services
@@ -11,12 +13,13 @@ namespace HoodWink.Services
         // Generate payload for each technique for given file, lang, prot
         public static void AllLanguageTechniques(string file, string lang, string form, string extr, string prot) 
         {
-            WriteService.Progress($"All Techniques for file: {file} lang: {lang} form: {form} extr: {extr} prot: {prot}");
+            WriteService.Header($"All Techniques for file: {file} lang: {lang} form: {form} extr: {extr} prot: {prot}");
+            // Timer
+            Stopwatch watch = Stopwatch.StartNew();
 
+            // Get types
             List<Type> langTypes;
             WinkService.LoadLanguage(lang, out langTypes);
-
-
 
             // for each technique
             List<string> techniqueTypes = new List<string>();
@@ -35,12 +38,17 @@ namespace HoodWink.Services
             {                
                 WinkService.Build(file, lang, form, extr, prot, tech);
             }
+
+            // Elapsed Time
+            watch.Stop();
+            WriteService.Info($"Time Elapsed: {watch.ElapsedMilliseconds}ms");
         }
 
         // // Generate payload for each technique for given file,lang, prot for every language
         public static void EveryLanuagesTechniques(string file)
         {
-            WriteService.Progress($"Everything for file: {file}");
+            WriteService.Header($"Everything for file: {file}");
+            Stopwatch watch = Stopwatch.StartNew();
 
             // Get Lanuguages
             List<string> languages = new List<string>();
@@ -59,11 +67,11 @@ namespace HoodWink.Services
                         languages.Add(langName);
                     }
                 }
-            }
+            }                       
 
             foreach (string language in languages)
             {
-                WriteService.Info($"Generating for language: {language}");
+                WriteService.Info($"Starting: {language}");
 
                 // Get types
                 List<Type> langTypes = new List<Type>();
@@ -116,6 +124,10 @@ namespace HoodWink.Services
                     }
                 }
             }
+
+            // Elapsed Time
+            watch.Stop();
+            WriteService.Info($"Time Elapsed: {watch.ElapsedMilliseconds}ms");
         }
     }
 }
