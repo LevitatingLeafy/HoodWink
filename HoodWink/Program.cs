@@ -19,6 +19,8 @@ namespace HoodWink
             string tech = null;
             string prot = null;
             string extr = null;  // Will be List later
+            bool genAll = false;
+            bool genEvery = false;
 
             // Parse Args
             for (int i = 0; i < args.Length; i++)
@@ -72,6 +74,30 @@ namespace HoodWink
                 {
                     PrintService.PrintLanguageModulesDescriptions(args[i + 1]);
                     System.Environment.Exit(0);
+                }
+                else if (args[i] == "-genAll")
+                {
+                    genAll = true;
+                }
+                else if (args[i] == "-genEvery")
+                {
+                    genEvery = true;
+                }
+            }
+
+            if (genAll) // Generate All: -file -lang -pot
+            {
+                if (file is null || lang is null || prot is null)
+                {
+                    AutoGenerator.AllLanguageModules(lang);
+                }
+            }
+
+            if (genEvery) // Generate All: -file -lang -pot
+            {
+                if (file is null || lang is null || prot is null)
+                {
+                    AutoGenerator.EveryLanuagesModules();
                 }
             }
 

