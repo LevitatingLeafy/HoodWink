@@ -69,7 +69,7 @@ namespace HoodWink.Services
             string targetSourcePath = payloadDir + filename;
 
             // Generate
-            string generatedFilePath = generatorInstance.Gen(ref targetSourcePath, ref file, ref formatExeInstance, ref techniqueInstance, ref protectionInstance, ref extraInstance);
+            string generatedFilePath = generatorInstance.Gen(ref targetSourcePath, ref file, ref formatExeInstance, ref techniqueInstance, ref protection, ref protectionInstance, ref extraInstance);
             if (generatedFilePath is null)
             {
                 WriteService.ErrorExit("Generator exited with errors");

@@ -9,7 +9,7 @@ namespace HoodWink.Languages.Csharp.Generators
     {
         public override string Description => "Default Generator for Exe";
         public override string ProjectPath => throw new NotImplementedException(); // Not Used
-        public override string Gen(ref string targetSourcePath, ref string file, ref Models.Base.FormatExe formatInstance, ref Models.Base.Technique techniqueInstance, ref Models.Base.Protections protectionInstance, ref Models.Base.Extras extraInstance)
+        public override string Gen(ref string targetSourcePath, ref string file, ref Models.Base.FormatExe formatInstance, ref Models.Base.Technique techniqueInstance, ref string protection, ref Models.Base.Protections protectionInstance, ref Models.Base.Extras extraInstance)
         {
             string generatedPath = null;
             string newLine = "\n";
@@ -45,17 +45,27 @@ namespace HoodWink.Languages.Csharp.Generators
                 // Main Logic
                 gen += formatInstance.MainBody;
                 gen += newLine;
-                // Protection                               // NOT DONE
+                
+                // Protection
                 byte[] payload = File.ReadAllBytes(file);
-                string encryptedPayload = CryptoService.Encrypt(payload, out string keyBase64, out string ivBase64);
-                //Console.WriteLine($"Decrypted : {BitConverter.ToString(CryptoService.Decrypt(encryptedPayload, keyBase64, ivBase64))}"); // Debug
-                //Console.WriteLine($"Decrypted : {Encoding.UTF8.GetString(CryptoService.Decrypt(encryptedPayload, keyBase64, ivBase64))}"); // Debug
-                gen += $"string b64 = \"{encryptedPayload}\";";
-                gen += newLine;
-                gen += $"string key = \"{keyBase64}\";";
-                gen += newLine;
-                gen += $"string iv  = \"{ivBase64}\";";
-                gen += newLine;
+                if (protection != "None")
+                {
+                    string encryptedPayload = CryptoService.Encrypt(payload, out string keyBase64, out string ivBase64);
+                    //Console.WriteLine($"Decrypted : {BitConverter.ToString(CryptoService.Decrypt(encryptedPayload, keyBase64, ivBase64))}");   // Debug
+                    //Console.WriteLine($"Decrypted : {Encoding.UTF8.GetString(CryptoService.Decrypt(encryptedPayload, keyBase64, ivBase64))}"); // Debug
+                    gen += $"string b64 = \"{encryptedPayload}\";";
+                    gen += newLine;
+                    gen += $"string key = \"{keyBase64}\";";
+                    gen += newLine;
+                    gen += $"string iv  = \"{ivBase64}\";";
+                    gen += newLine;
+                }
+                else // No Protection
+                {
+                    string encryptedPayload = CryptoService.Encode(payload);
+                    gen += $"string b64 = \"{encryptedPayload}\";";
+                    gen += newLine;
+                }
                 gen += extraInstance.MainLogic;
                 gen += newLine;
                 gen += protectionInstance.MainLogic; // decryption happens here

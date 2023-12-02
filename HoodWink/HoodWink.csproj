@@ -54,6 +54,7 @@
     <Compile Include="Languages\Cpp\Formats\Exe.cs" />
     <Compile Include="Languages\Cpp\Generators\Exe.cs" />
     <Compile Include="Languages\Cpp\Protections\Aes256.cs" />
+    <Compile Include="Languages\Cpp\Protections\None.cs" />
     <Compile Include="Languages\Cpp\Techniques\Inline_NewThread.cs" />
     <Compile Include="Languages\Cpp\Techniques\Remote_CreateRemoteThread.cs" />
     <Compile Include="Languages\Csharp\Compilers\Exe.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Languages\Csharp\FileDependencies\Kernel32.cs" />
     <Compile Include="Languages\Csharp\Formats\Exe.cs" />
     <Compile Include="Languages\Csharp\Generators\Exe.cs" />
+    <Compile Include="Languages\Csharp\Generators\None.cs" />
     <Compile Include="Languages\Csharp\Protections\Aes256.cs" />
     <Compile Include="Languages\Csharp\Techniques\Inline.cs" />
     <Compile Include="Languages\Csharp\Techniques\Inline_NewThread.cs" />
