@@ -62,3 +62,21 @@ Example:
 Ha! Made you look
 
 </details>
+
+
+### About Contributers
+<details>
+<summary>Structure</summary>
+
+They're all me, I have many accounts
+
+</details>
+
+### About Contributers
+<details>
+<summary>Structure</summary>
+
+They're all me, I have many accounts
+
+</details>
+
