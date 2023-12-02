@@ -40,9 +40,9 @@ namespace HoodWink.Services
         }
         public static void Success(string msg)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("[+] Success: ");
             Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("[+] Success: ");
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine(msg);
             Console.ResetColor();
         }

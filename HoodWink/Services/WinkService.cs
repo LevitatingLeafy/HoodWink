@@ -7,9 +7,9 @@ namespace HoodWink.Services
 {
     public static class WinkService
     {
-        public static void BuildExe(string file, string lang, string format, string extra, string protection, string technique)
+        public static void Build(string file, string lang, string format, string extra, string protection, string technique)
         {
-            WriteService.Progress($"file: {file} lang: {lang} form: {format} tech: {technique} prot: {protection} extr: {extra}");
+            WriteService.Progress($"file: {file} lang: {lang} form: {format} extr: {extra} prot: {protection} tech: {technique}");
 
             // Types
             List<Type> langTypes;
@@ -55,9 +55,9 @@ namespace HoodWink.Services
                 Directory.CreateDirectory(payloadDir);
             }
 
-            // Make target 
-            //string filename = technique + "-" + Guid.NewGuid() + ".cs";
-            string filename = technique + "-" + Guid.NewGuid();
+            // Make target             
+            string guid = Guid.NewGuid().ToString();
+            string filename = lang + "_" + extra + "_" + protection + "_" + technique + "-" + guid.Substring(0, 8);
             if (lang == Utils.Enums.LANGUAGES.Csharp.ToString())
             {
                 filename += ".cs";

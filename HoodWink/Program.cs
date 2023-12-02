@@ -19,7 +19,6 @@ namespace HoodWink
             string tech = null;
             string prot = null;
             string extr = null;  // Will be List later
-            bool genAll = false;
             bool genEvery = false;
 
             // Parse Args
@@ -54,6 +53,11 @@ namespace HoodWink
                     PrintService.PrintLanguages();
                     System.Environment.Exit(0);
                 }
+                else if (args[i] == "-help")
+                {
+                    HelpFlags();
+                    System.Environment.Exit(0);
+                }
                 else if (args[i] == "-showall")
                 {
                     PrintService.PrintAllModules();
@@ -62,9 +66,9 @@ namespace HoodWink
                 else if (args[i] == "-show" && args.Length >= i + 2)
                 {
                     Console.WriteLine($"args.length : {args.Length}");
-                    PrintService.PrintLanguageModules(args[i + 1]);                    
+                    PrintService.PrintLanguageModules(args[i + 1]);
                     System.Environment.Exit(0);
-                }                
+                }
                 else if (args[i] == "-descall")
                 {
                     PrintService.PrintAllModulesDescriptions();
@@ -74,58 +78,78 @@ namespace HoodWink
                 {
                     PrintService.PrintLanguageModulesDescriptions(args[i + 1]);
                     System.Environment.Exit(0);
-                }
-                else if (args[i] == "-genAll")
-                {
-                    genAll = true;
-                }
+                }                
                 else if (args[i] == "-genEvery")
                 {
                     genEvery = true;
                 }
             }
 
-            if (genAll) // Generate All: -file -lang -pot
+
+            if (tech == "All") // Generate All Techniques
             {
-                if (file is null || lang is null || prot is null)
+                if (file != null && lang != null && form != null && extr != null)
                 {
-                    AutoGenerator.AllLanguageModules(lang);
+                    AutoGenerator.AllLanguageTechniques(file, lang, form, extr, prot);
+                }
+                else
+                {
+                    WriteService.ErrorExit("-genAll requires: file, lang, form, extr, prot");
                 }
             }
-
-            if (genEvery) // Generate All: -file -lang -pot
+            else if (genEvery) // Generate Every
             {
-                if (file is null || lang is null || prot is null)
+                if (file != null)
                 {
-                    AutoGenerator.EveryLanuagesModules();
+                    AutoGenerator.EveryLanuagesTechniques(file);
+                }
+                else
+                {
+                    WriteService.ErrorExit("-genEvery requires: file, lang, form, extr, prot");
                 }
             }
-
-            // Check if args set
-            if (file is null || lang is null || form is null || tech is null || prot is null || extr is null)
+            else if (file != null && lang != null && form != null && tech != null && prot != null && extr != null) // Build Single
+            {
+                WinkService.Build(file, lang, form, extr, prot, tech);
+            }
+            else
             {
                 WriteService.Error("Args Error");
                 Usage();
                 System.Environment.Exit(0);
             }
-
-            // Build
-            WinkService.BuildExe(file, lang, form, extr, prot, tech);
         }
 
         // Usage
         private static void Usage()
         {
-            WriteService.Header("Show Modules: ");
+            WriteService.Header("Helper Flags: ");
+            WriteService.Info(@"    .\HoodWink.exe  -help         :  Show help menu for Flags");
             WriteService.Info(@"    .\HoodWink.exe  -langs        :  Show all Languages");
             WriteService.Info(@"    .\HoodWink.exe  -showall      :  Show all Modules");
             WriteService.Info(@"    .\HoodWink.exe  -show <lang>  :  Show Modules for lang");
             WriteService.Info(@"    .\HoodWink.exe  -descall      :  Show all Modules + Descriptions");
             WriteService.Info(@"    .\HoodWink.exe  -desc <lang>  :  Show Modules + Descriptions for lang");
-            WriteService.Header("Syntax: ");
+            WriteService.Header("Syntax: Build Single");
             WriteService.Info(@"    .\HoodWink.exe -file <name> -lang <name> -form <name> -extr <name> -prot <name> -tech <name> ");
+            WriteService.Header("Syntax: Build all Techniques");
+            WriteService.Info(@"    .\HoodWink.exe -file <name> -lang <name> -form <name> -extr <name> -prot <name> -tech All ");
+            WriteService.Header("Syntax: Build Everything");
+            WriteService.Info(@"    .\HoodWink.exe -file <name> -genEvery");
             WriteService.Header("Example: ");
             WriteService.Info(@"    .\HoodWink.exe -file C:\Payloads\msf.bin -lang Csharp -form Exe -extr AmsiBypass -prot Aes256 -tech Spawn_QueueApc");
+        }
+
+        // Help
+        private static void HelpFlags()
+        {
+            WriteService.Header("Help: ", "flags");
+            WriteService.Info(@"    -file   :  file containing payload (shellcode)");
+            WriteService.Info(@"    -lang   :  wich languages to use");
+            WriteService.Info(@"    -form   :  which file format to use");
+            WriteService.Info(@"    -extr   :  extra technique to add");
+            WriteService.Info(@"    -prot   :  protection type (ex. encryption)");
+            WriteService.Info(@"    -tech   :  technique to use (ex. injection)");
         }
     }
 }
