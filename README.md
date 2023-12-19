@@ -5,6 +5,7 @@ A Modular project for loading "fun" code
 Currently
 - HoodWink will take in shellcode and encrypt it
 - Generate a loader using a given language and technique(s) to execute the shellcode
+  - Techniques include things like spawn/queue apc injection and amsi bypass
 - More modules and languages can easily be added by inheriting from base classes
 - Still a work in progress with lots to do :)
 
