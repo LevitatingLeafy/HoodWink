@@ -5,6 +5,7 @@ A Modular project for loading "fun" code
 Currently
 - HoodWink will take in shellcode and encrypt it
 - Generate a loader using a given language and technique(s) to execute the shellcode
+  - Techniques include things like spawn/queue apc injection and amsi bypass
 - More modules and languages can easily be added by inheriting from base classes
 - Still a work in progress with lots to do :)
 
@@ -50,12 +51,16 @@ Helper Flags:
     .\HoodWink.exe  -show <lang>  :  Show Modules for lang
     .\HoodWink.exe  -descall      :  Show all Modules + Descriptions
     .\HoodWink.exe  -desc <lang>  :  Show Modules + Descriptions for lang
+
 Syntax: Build Single
     .\HoodWink.exe -file <name> -lang <name> -form <name> -extr <name> -prot <name> -tech <name>
+
 Syntax: Build all Techniques
     .\HoodWink.exe -file <name> -lang <name> -form <name> -extr <name> -prot <name> -tech All
+
 Syntax: Build Everything
     .\HoodWink.exe -file <name> -genEvery
+
 Example:
     .\HoodWink.exe -file C:\Payloads\msf.bin -lang Csharp -form Exe -extr AmsiBypass -prot Aes256 -tech Spawn_QueueApc
 ```
