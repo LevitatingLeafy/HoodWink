@@ -5,7 +5,7 @@ namespace HoodWink
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main(string[] args) // ./program.exe  -lang l -file f
         {
             if (args.Length == 0)
             {
